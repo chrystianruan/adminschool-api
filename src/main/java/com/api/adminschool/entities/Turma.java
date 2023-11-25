@@ -1,10 +1,14 @@
 package com.api.adminschool.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+
 @Table(name = "turmas")
 public class Turma {
     @Id
@@ -15,6 +19,7 @@ public class Turma {
     private Date createdAt;
     @Column(name = "updated_at")
     private Date updatedAt;
+    @JsonBackReference("alunos")
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos;
     @ManyToMany
@@ -75,4 +80,6 @@ public class Turma {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
 }

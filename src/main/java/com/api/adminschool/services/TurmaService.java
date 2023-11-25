@@ -28,7 +28,7 @@ public class TurmaService {
         try {
             Optional<Turma> turma = turmaRepository.findById(id);
             return new ResponseEntity<Optional<Turma>>(turma, HttpStatus.OK);
-        } catch (NoSuchElementException noElement) {
+        } catch (HttpClientErrorException.NotFound notFound) {
             return new ResponseEntity<Optional<Turma>>(HttpStatus.NOT_FOUND);
         }
     }
@@ -37,7 +37,6 @@ public class TurmaService {
         turmaRepository.save(turma);
         return new ResponseEntity<Turma>(HttpStatus.CREATED);
     }
-    
     public ResponseEntity<Optional<Turma>> deleteTurma(Long id) {
        try {
            turmaRepository.deleteById(id);

@@ -1,5 +1,8 @@
 package com.api.adminschool.entities;
 
+import com.api.adminschool.dtos.AlunoDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +15,8 @@ public class Aluno {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
     private String nome;
+    private String matricula;
+    @JsonBackReference("turmas")
     @ManyToOne
     @JoinColumn(name = "turma_id")
     private Turma turma;
@@ -46,6 +51,14 @@ public class Aluno {
         this.nome = nome;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
     public Turma getTurma() {
         return turma;
     }
@@ -68,5 +81,20 @@ public class Aluno {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public AlunoDTO parseToDTO() {
+        AlunoDTO alunoDTO = new AlunoDTO();
+        alunoDTO.setId(this.getId());
+        alunoDTO.setNome(this.getNome());
+        alunoDTO.setMatricula(this.getMatricula());
+        alunoDTO.setDataNascimento(this.getDataNascimento());
+        alunoDTO.setTurmaName(this.getTurma().getNome());
+        alunoDTO.setTurmaObj(this.getTurma());
+        alunoDTO.setCreatedAt(this.getCreatedAt());
+        alunoDTO.setUpdatedAt(this.getUpdatedAt());
+        alunoDTO.setTurmaID(this.getTurma().getId());
+
+        return alunoDTO;
     }
 }
