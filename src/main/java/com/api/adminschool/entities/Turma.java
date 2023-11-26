@@ -1,5 +1,6 @@
 package com.api.adminschool.entities;
 
+import com.api.adminschool.dtos.TurmaDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -79,6 +80,18 @@ public class Turma {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public TurmaDTO parseToDTO () {
+        TurmaDTO turmaDTO = new TurmaDTO();
+        turmaDTO.setId(this.getId());
+        turmaDTO.setNome(this.getNome());
+        turmaDTO.setAlunos(this.getAlunos());
+        turmaDTO.setDisciplinas(this.getDisciplinas());
+        turmaDTO.setCreatedAt(this.getCreatedAt());
+        turmaDTO.setUpdatedAt(this.getUpdatedAt());
+
+        return turmaDTO;
     }
 
 

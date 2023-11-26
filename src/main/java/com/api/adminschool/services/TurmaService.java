@@ -10,26 +10,39 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
 import javax.transaction.Transactional;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TurmaService {
     @Autowired
     private TurmaRepository turmaRepository;
 
-    public List<Turma> getAllTurmas() {
-        return turmaRepository.findAll();
+    public List<?> getAllTurmas() {
+        try {
+            List<String> listaVazia = new ArrayList<>();
+            listaVazia.add("Nenhum aluno cadastrado até o momento");
+            List<Turma> turmas = turmaRepository.findAll();
+            if (turmas.isEmpty()) {
+                return listaVazia;
+            }
+            List<TurmaDTO> turmaDTOS = new ArrayList<>();
+            for (Turma turma : turmas) {
+                TurmaDTO dto = turma.parseToDTO();
+                turmaDTOS.add(dto);
+            }
+            return turmaDTOS;
+        } catch (RuntimeException runEx) {
+            throw new RuntimeException(runEx);
+        }
     }
 
-    public ResponseEntity<Optional<Turma>> getTurmaById(Long id) {
+    public ResponseEntity<TurmaDTO> getTurmaById(Long id) {
         try {
             Optional<Turma> turma = turmaRepository.findById(id);
-            return new ResponseEntity<Optional<Turma>>(turma, HttpStatus.OK);
+            TurmaDTO dto = turma.get().parseToDTO();
+            return new ResponseEntity<TurmaDTO>(dto, HttpStatus.OK);
         } catch (HttpClientErrorException.NotFound notFound) {
-            return new ResponseEntity<Optional<Turma>>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     @Transactional

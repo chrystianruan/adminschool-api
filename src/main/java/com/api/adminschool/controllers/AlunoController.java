@@ -1,6 +1,7 @@
 package com.api.adminschool.controllers;
 
 import com.api.adminschool.dtos.AlunoDTO;
+import com.api.adminschool.dtos.TurmaDTO;
 import com.api.adminschool.entities.Aluno;
 import com.api.adminschool.repositories.AlunoRepository;
 import com.api.adminschool.services.AlunoService;
@@ -36,5 +37,9 @@ public class AlunoController {
     @DeleteMapping("/deletar-aluno/{matricula}")
     public ResponseEntity<?> deleteAluno(@PathVariable("matricula") String matricula) {
         return alunoService.deleteAluno(matricula);
+    }
+    @PutMapping("/atualizar-aluno/{matricula}")
+    public ResponseEntity<?> updateAluno(@PathVariable("matricula") String matricula, @RequestBody @Valid AlunoDTO alunoDTO) {
+        return alunoService.updateAluno(matricula, alunoDTO);
     }
 }

@@ -100,8 +100,8 @@ public class AlunoDTO implements Serializable {
         aluno.setMatricula(this.getMatricula());
         aluno.setTurma(this.getTurmaObj());
         aluno.setDataNascimento(this.getDataNascimento());
-        aluno.setCreatedAt(this.createdAt);
-        aluno.setUpdatedAt(this.updatedAt);
+        aluno.setCreatedAt(this.getCreatedAt());
+        aluno.setUpdatedAt(this.getUpdatedAt());
 
         return aluno;
     }

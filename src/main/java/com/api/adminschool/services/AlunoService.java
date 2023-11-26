@@ -129,7 +129,6 @@ public class AlunoService {
                     .map(aluno -> {
                         aluno.setTurma(turma);
                         aluno.setUpdatedAt(new Date());
-                        //TODO: fazer adicao no metodo alunos da model Turma
                         alunoRepository.save(aluno);
                         return new ResponseEntity<String>("Aluno atualizado com sucesso", HttpStatus.OK);
                     }).orElse(new ResponseEntity<String>("Erro encontrado ao tentar atualizar aluno", HttpStatus.BAD_GATEWAY));

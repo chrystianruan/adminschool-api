@@ -18,12 +18,12 @@ public class TurmaController {
     private TurmaService turmaService;
 
     @GetMapping(value = "/turmas")
-    public List<Turma> getAllTurmas() {
+    public List<?> getAllTurmas() {
         return turmaService.getAllTurmas();
     }
 
     @GetMapping(value = "/turma/{id}")
-    public ResponseEntity<Optional<Turma>> showTurma(@PathVariable("id") Long id) {
+    public ResponseEntity<TurmaDTO> showTurma(@PathVariable("id") Long id) {
         return turmaService.getTurmaById(id);
     }
 
