@@ -2,6 +2,7 @@ package com.api.adminschool.entities;
 
 import com.api.adminschool.dtos.AlunoDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,7 +17,7 @@ public class Aluno {
     private Date dataNascimento;
     private String nome;
     private String matricula;
-    @JsonBackReference("turmas")
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "turma_id")
     private Turma turma;

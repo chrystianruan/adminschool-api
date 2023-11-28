@@ -1,5 +1,7 @@
 package com.api.adminschool.entities;
 
+import com.api.adminschool.dtos.ProfessorDTO;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -57,5 +59,16 @@ public class Professor {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public ProfessorDTO parseToDTO() {
+        ProfessorDTO dto = new ProfessorDTO();
+        dto.setId(this.getId());
+        dto.setNome(this.getNome());
+        dto.setDisciplina(this.getDisciplina());
+        dto.setCreatedAt(this.getCreatedAt());
+        dto.setUpdateAt(this.getUpdatedAt());
+
+        return dto;
     }
 }

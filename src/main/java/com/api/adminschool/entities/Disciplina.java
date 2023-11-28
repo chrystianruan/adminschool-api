@@ -1,5 +1,8 @@
 package com.api.adminschool.entities;
 
+import com.api.adminschool.dtos.DisciplinaDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +20,7 @@ public class Disciplina {
     private Date createdAt;
     @Column(name = "updated_at")
     private Date updatedAt;
+    @JsonIgnore
     @ManyToMany(mappedBy = "disciplinas")
     private List<Turma> turmas;
 
@@ -67,5 +71,18 @@ public class Disciplina {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public DisciplinaDTO parseToDTO() {
+        DisciplinaDTO dto = new DisciplinaDTO();
+        dto.setId(this.getId());
+        dto.setNome(this.getNome());
+        dto.setTurmas(this.getTurmas());
+        dto.setProfessor(this.getProfessor());
+        dto.setProfessorID(this.getProfessor().getId());
+        dto.setCreatedAt(this.getCreatedAt());
+        dto.setUpdatedAt(this.getUpdatedAt());
+
+        return dto;
     }
 }

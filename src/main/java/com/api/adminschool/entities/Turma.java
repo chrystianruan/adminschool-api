@@ -20,9 +20,10 @@ public class Turma {
     private Date createdAt;
     @Column(name = "updated_at")
     private Date updatedAt;
-    @JsonBackReference("alunos")
+    @JsonIgnore
     @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "turma_disciplinas",
