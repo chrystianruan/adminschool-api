@@ -1,6 +1,7 @@
 package com.api.adminschool.entities;
 
 import com.api.adminschool.dtos.ProfessorDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +13,7 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nome;
+    @JsonIgnore
     @OneToOne(mappedBy = "professor")
     private Disciplina disciplina;
     @Column(name = "created_at")

@@ -13,6 +13,7 @@ public class Disciplina {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nome;
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "professor_id")
     private Professor professor;

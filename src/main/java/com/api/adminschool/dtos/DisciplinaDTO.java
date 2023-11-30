@@ -17,6 +17,8 @@ public class DisciplinaDTO {
     private Date updatedAt;
     private List<Turma> turmas;
     private Professor professor;
+    @JsonProperty("turmas_id")
+    private List<Long> turmasID;
 
     public DisciplinaDTO() {}
 
@@ -74,6 +76,14 @@ public class DisciplinaDTO {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public List<Long> getTurmasID() {
+        return turmasID;
+    }
+
+    public void setTurmasID(List<Long> turmasID) {
+        this.turmasID = turmasID;
     }
 
     public Disciplina parseToObject() {
