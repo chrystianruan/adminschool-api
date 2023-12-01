@@ -18,7 +18,7 @@ public class DisciplinaController {
         return disciplinaService.getAllDisciplinas();
     }
     @PostMapping("/salvar_disciplina")
-    public ResponseEntity<String> saveDisciplina(@RequestBody DisciplinaDTO dto) {
+    public ResponseEntity<?> saveDisciplina(@RequestBody DisciplinaDTO dto) {
         return disciplinaService.saveDisciplina(dto);
     }
     @GetMapping("/disciplina/{id}")
@@ -26,7 +26,7 @@ public class DisciplinaController {
         return disciplinaService.showDisciplina(id);
     }
     @DeleteMapping("/delete-disciplina/{id}")
-    public ResponseEntity<String> deleteDisciplina(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteDisciplina(@PathVariable("id") Long id) {
         return disciplinaService.deleteDisciplina(id);
     }
     @PutMapping("/atualizar-disciplina/{id}")
